@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+     <div class="container">
+       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+       </button>
+       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+           <li class="nav-item active">
+             <a class="nav-link"  href="/">Home</a>
+           </li>
+           <%if(user){%>
+            <li class="nav-item">
+              <a class="nav-link" href="/friends">Friends</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/groups">Groups</a>
+            </li>
+            
+          <%}else{%>
+            <li>
+              <a class="nav-link" href="/login">Login</a>
+            </li>
+            <li>
+              <a class="nav-link" href="/signup">Signup</a>
+            </li>
+            <%}%>
+         </ul>
+        <%if(user){%>
+          <input type="hidden" id="userId" value="<%=user%>">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="friendRequestsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              Friend Requests
+            </button>
+            <ul id="friendRequests" class="dropdown-menu" aria-labelledby="friendRequestsDropdown">
+              <%if(requests.length){%>
+                <%for(let req of requests){%>
+                  <li>
+                    <a class="dropdown-item" href="/profile/<%=req.id%>"><%=req.name%></a>
+                  </li>
+                <%}%>
+              <%}else{%>
+                <span>no friend request</span>
+              <%}%>
+            </ul>
+          </div>
+          <br>
+          <form action="/logout" method="POST">
+            <input type="submit" value="logout" class="btn btn-danger">
+          </form>
+        <%}%>
+        </div>
+     </div>
+     
+   </nav>
