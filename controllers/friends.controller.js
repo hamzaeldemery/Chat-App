@@ -25,7 +25,7 @@ exports.acceptRequest = (req,res,next) => {
         hisId: req.body.hisId,
         hisImg: req.body.hisImg
     }
-    userModel.cancelRequest(data).then(() =>{
+    userModel.rejectRequest(data).then(() =>{
         userModel.addToFriends(data).then(() => {
             res.redirect('/profile/'+req.body.hisId)
         }).catch((err) => {
@@ -46,7 +46,7 @@ exports.rejectReqeust = (req,res,next) => {
         hisId: req.body.hisId,
         hisImg: req.body.hisImg
     }
-    userModel.cancelRequest(data).then(() => {
+    userModel.rejectRequest(data).then(() => {
         res.redirect('/profile/'+req.body.hisId)
     }).catch((err) => {
         console.log(err)

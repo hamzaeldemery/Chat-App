@@ -24,7 +24,7 @@
                             <%}else if(isRequesting){%>
                                 <input id="cancelRequest" type="submit" value="Cancel request" class="btn btn-primary" formaction="/friend/cancel">
                             <%}else{%>
-                                <input id="addFriendBtn" type="submit" value="Add" class="btn btn-success" >
+                                <input id="addFriendBtn" type="submit" value="Add" class="btn btn-success" formaction="/friend/add">
                             <%}%>
                         </form>
                     <%}%>
@@ -35,10 +35,8 @@
     <%- include('parts/scripts')%>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/socket/init.js"></script>
-    <%if(!isOwner && !isFriend && !isRequested && !isRequesting){%>
-        <script src="/js/socket/friends.js"></script>
-    <%}else if(isRequesting){%>
-        <script src="/js/socket/pendingRequest.js"></script>
+    <%if(!isOwner){%>
+        <script id="notFriends" src="/js/socket/notFriends.js"></script>
     <%}%>
     </body>
 </html>

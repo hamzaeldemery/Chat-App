@@ -229,6 +229,42 @@ exports.cancelRequest = async (data) => {
      }
 }
 
+exports.rejectRequest = async (data) => {
+     let me = {
+          id: data.myId,
+          img: data.myImg,
+          name: data.myName 
+     }
+     let friend = {
+          id: data.hisId,
+          img: data.hisImg,
+          name: data.hisName 
+     }
+     try{ 
+          await mongoose.connect(DB_url)
+          await User.updateOne({
+               _id: me.id
+          },{$pull:{
+               comingRequests: {id: String(friend.id)}
+               } 
+          })
+          await mongoose.disconnect()
+          await mongoose.connect(DB_url)
+          await User.updateOne({
+               _id: friend.id
+          },{$pull:{
+               sentRequests: {id: String(me.id)}
+               }
+          })
+          mongoose.disconnect()
+          return
+     } catch ( error) {
+          mongoose.disconnect()
+          console.log(error)
+          throw new Error(error)
+     }
+}
+
 
 exports.addToFriends = async (data) => {
      let me = {

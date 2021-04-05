@@ -21,7 +21,7 @@ socket.on('newFreindRequest', (data) => {
 });
 
 btn.onclick = (e) => {
-    e.preventDefault();
+
     console.log("HI")
     btn.classList.remove('btn-danger')
     btn.classList.add('btn-secondary')
