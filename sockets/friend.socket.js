@@ -31,7 +31,6 @@ module.exports = (io) => {
             })
         })
         socket.on('rejectFriendRequest',data => {
-            console.log(data);
             userModel.rejectRequest(data).then(() => {
                 socket.emit('requestRejected');
                 io.to(data.hisId).emit('friendRejected')

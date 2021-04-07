@@ -341,7 +341,7 @@ exports.getFriendRequests = async(id) => {
      try{
           await mongoose.connect(DB_url);
           let reqs  = await User.findById(id,{comingRequests: true});
-          mongoose.disconnect();
+          await mongoose.disconnect();
           return reqs.comingRequests;
      }
      catch(error){
@@ -354,7 +354,7 @@ exports.getFriends = async(id) => {
      try{
           await mongoose.connect(DB_url);
           let reqs  = await User.findById(id,{friends: true});
-          mongoose.disconnect();
+          await mongoose.disconnect();
           return reqs.friends;
      }
      catch(error){

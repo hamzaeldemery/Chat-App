@@ -13,8 +13,6 @@ const hisImg=document.getElementById("hisImg").value
 const hisId=document.getElementById("hisId").value
 
 
-if(deleteFriendBtn != null) console.log('delete button');
-
 if( acceptBtn != null){
     acceptBtn.onclick = (e) => {
         e.preventDefault();
@@ -60,7 +58,6 @@ if(addFriendBtn != null){
 if(deleteFriendBtn != null){
     deleteFriendBtn.onclick = (e) => {
         e.preventDefault();
-        console.log('dletepressed')
         socket.emit('deleteFriendRequest',{
             myName,
             myImg, 
@@ -73,9 +70,7 @@ if(deleteFriendBtn != null){
 }
 
 if(cancelRequestBtn != null){
-    console.log('cancelled')
     cancelRequestBtn.onclick = (e) => {
-        console.log('pressed cancel')
         e.preventDefault();
         socket.emit('cancelFriendRequest',{
             myName,
@@ -113,7 +108,7 @@ socket.on('newFreindRequest', () => {
 socket.on('requestCancelled', () => {
     cancelRequestBtn.remove();
     document.getElementById('friends-form').innerHTML +=`
-    <input id="addFriendBtn" type="submit" value="Add" class="btn btn-success" formaction="/friend/accept">
+    <input id="addFriendBtn" type="submit" value="Add" class="btn btn-success" formaction="/friend/add">
     `
     addFriendBtn = document.getElementById('addFriendBtn')
 })
@@ -129,7 +124,7 @@ socket.on('friendAccepted', () => {
 socket.on('friendRejected', () => {
     cancelRequestBtn.remove();
     document.getElementById('friends-form').innerHTML +=`
-    <input id="addFriendBtn" type="submit" value="Add" class="btn btn-success" formaction="/friend/accept">
+    <input id="addFriendBtn" type="submit" value="Add" class="btn btn-success" formaction="/friend/add">
     `
     addFriendBtn = document.getElementById('addFriendBtn')
 })
@@ -139,7 +134,7 @@ socket.on('friendRejected', () => {
 socket.on('friendDeleted', () => {
     deleteFriendBtn.remove();
     document.getElementById('friends-form').innerHTML += `
-        <input id="addFriendBtn" type="submit" value="Add" class="btn btn-success" formaction="/friend/accept">
+        <input id="addFriendBtn" type="submit" value="Add" class="btn btn-success" formaction="/friend/add">
     `
     addFriendBtn = document.getElementById('addFriendBtn')
 })
@@ -151,7 +146,7 @@ socket.on("unRequested",() => {
     acceptBtn.remove();
     rejectBtn.remove();
     document.getElementById('friends-form').innerHTML +=`
-    <input id="addFriendBtn" type="submit" value="Add" class="btn btn-success" formaction="/friend/accept">
+    <input id="addFriendBtn" type="submit" value="Add" class="btn btn-success" formaction="/friend/add">
     `
     addFriendBtn = document.getElementById('addFriendBtn')
 })
@@ -170,7 +165,7 @@ socket.on('requestRejected', () => {
     acceptBtn.remove();
     rejectBtn.remove();
     document.getElementById('friends-form').innerHTML +=`
-    <input id="addFriendBtn" type="submit" value="Add" class="btn btn-success" formaction="/friend/accept">
+    <input id="addFriendBtn" type="submit" value="Add" class="btn btn-success" formaction="/friend/add">
     `
     addFriendBtn = document.getElementById('addFriendBtn')
 })

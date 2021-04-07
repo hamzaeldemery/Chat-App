@@ -9,10 +9,8 @@ module.exports = io => {
         });
         socket.on("goOnline" , id => {
             io.onlineUsers[id] = true;
-            console.log("online: " + io.onlineUsers)
             socket.on("disconnect", () => {
                 io.onlineUsers[id] = false;
-                console.log(io.onlineUsers)
             })
         })
     })
