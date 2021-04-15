@@ -47,7 +47,7 @@ const profileRouter = require('./routes/profile.route')
 const friendRouter = require('./routes/friends.route')
 const homeRouter = require('./routes/home.route')
 const getFriendRequests = require('./models/users.model').getFriendRequests
-
+const chatRouter = require('./routes/chat.route')
 
 app.use((req,res,next) => {
     if(req.session.userId){
@@ -61,6 +61,7 @@ app.use((req,res,next) => {
 })
 
 app.use('/',homeRouter)
+app.use('/chat',chatRouter)
 app.use('/profile',profileRouter)
 app.use('/friend',friendRouter)
 app.use('/',authRouter) 

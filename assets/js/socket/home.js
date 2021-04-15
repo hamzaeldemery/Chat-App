@@ -12,21 +12,25 @@ socket.on("onlineFriends", onlineFriends => {
         `
     }
     else{
-        let html = `<div class = "row">`
+        let html = `<div class = "row online-users ">`
         for(let friend of onlineFriends){
             console.log('friend: ')
             console.log(friend)
             html += `
-            <div class="col col-12 col-md-6 col-lg-3"  >
-                <img src="/${friend.img}">
-                <div>
-                    <a href = "/profile/${friend.id}">${friend.name}</a>
-                    <h3>Chat</h3>
-                </div>                    
+            <div class = "row online-user"> 
+                <div class="col-md-5 col-sm-5">
+                    <img class = "profile-photo-lg" src="/${friend.img}">
+                </div>
+                <div class="col-md-4 col-sm-4" style = "padding-top: 20px;">
+                    <h5><a  style="text-decoration: none;" class="profile-link" href = "/profile/${friend.id}" >${friend.name}</a></h5>
+                </div>
+                <div class="col-md-2 col-sm-2 " style = "padding-top: 20px;">
+                    <a href = "/chat/${friend.chatId}" class = "btn btn-success">Chat</a>
+                </div>                     
             </div>
             `   
         }
-        html += `</div>`
+        html += `</div>` 
         divOnline.innerHTML += html;
     }
 })

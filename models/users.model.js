@@ -2,6 +2,8 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const { Db } = require('mongodb')
 
+const Chat = require('./chat.model').Chat;
+
 const DB_url = 'mongodb://localhost:27017/chat-app'
 
 
@@ -18,7 +20,7 @@ const userSchema = mongoose.Schema({
         default: false
     },
     friends: {
-        type: [{name:String, id: String, img: String}],
+        type: [{name:String, id: String, img: String, chatId: String}],
         default: []
     },
     sentRequests: {
@@ -279,21 +281,29 @@ exports.addToFriends = async (data) => {
      }
      try{
           await mongoose.connect(DB_url)
+          let newChat = new Chat({
+               users : [me.id,friend.id]
+          })
+          let chat = await newChat.save()
+          await mongoose.disconnect()  
+
+          await mongoose.connect(DB_url)
           await User.updateOne({
                _id: friend.id
           },{$push:{
-               friends: { name: me.name, id: String(me.id), img: me.img}
+               friends: { name: me.name, id: String(me.id), img: me.img, chatId: chat._id}
                }
           })
           await mongoose.disconnect()
-          await mongoose.connect(DB_url)
+
+          await mongoose.connect(DB_url) 
           await User.updateOne({
                _id: me.id
           },{$push:{
-               friends: {name: friend.name, id: String(friend.id), img: friend.img}
+               friends: {name: friend.name, id: String(friend.id), img: friend.img, chatId: chat._id}
                }
           })
-          mongoose.disconnect()  
+          await mongoose.disconnect()  
           return
      } catch ( error) {
           mongoose.disconnect()
