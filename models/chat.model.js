@@ -7,4 +7,19 @@ const chatSchema = mongoose.Schema({
 
 const Chat = mongoose.model('chat',chatSchema)
 
+exports.getChat = async(chatId) => {
+    try {
+        await mongoose.connect(DB_url);
+        
+        let chat = await Chat.findById(chatId).populate({path:'users',select:'username img'})
+        await mongoose.disconnect();
+        return chat; 
+        console.tim
+    } catch (error) { 
+        mongoose.disconnect();
+        throw new Error(error); 
+    }
+}
+
+
 exports.Chat = Chat;

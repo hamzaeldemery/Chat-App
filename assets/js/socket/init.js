@@ -20,6 +20,7 @@ socket.on('newFreindRequest', (data) => {
     btn.classList.add('btn-danger')
 });
 
+
 btn.onclick = (e) => {
 
     console.log("HI")

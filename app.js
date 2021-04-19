@@ -40,7 +40,7 @@ io.onlineUsers = {}
 
 require('./sockets/friend.socket')(io)
 require('./sockets/init.socket')(io)
-
+require('./sockets/chat.socket')(io)
 
 const authRouter = require('./routes/auth.route')
 const profileRouter = require('./routes/profile.route')

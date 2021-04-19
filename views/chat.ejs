@@ -1,0 +1,35 @@
+<%- include('parts/header')%>
+<%- include('parts/navbar')%> 
+
+    <div class="container">
+        <input type="hidden" value="<%=user%>"   id="userId">
+        <input type="hidden" value="<%=friend%>" id="friendData">
+        <input type="hidden" value="<%=chatId%>" id="chatId">
+        <a href="/profile"><%=user%></a>
+        <div class="row">
+            <div class="col col-12 col-md-3">
+                <img src="/<%=friend.img%>" alt="">
+                <a href="/profile/<%=friend._id%>"><%=friend.username%></a>
+            </div>
+            <div class="col col-12 col-md-9 messages">
+                <div id="message container">
+                    <%for(let message of messages){%>
+                        <span><%=message.content%></span>
+                    <%}%>
+                </div>
+                <div id="message-form">
+                    <textarea id="message"></textarea>
+                    <button id="send">Send </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('parts/scripts')%>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/socket/init.js"></script>
+    <script src="/js/socket/messages.js"></script>
+    </body>
+</html>
+          
+          
